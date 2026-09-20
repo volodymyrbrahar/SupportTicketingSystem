@@ -1,0 +1,290 @@
+# Test Task: Support Ticket System
+
+## Goal
+
+Create a simple full-stack application for managing support tickets.
+
+
+The task is intentionally small. Do not try to build a perfect production system. The goal is to show basic full-stack understanding: simple UI, API, database, Docker, and ability to explain the code.
+
+Do **not** connect any AI API inside the project.
+
+---
+
+## Tech Stack
+
+Preferred backend stack:
+
+- **Node.js**
+
+Frontend:
+
+- React
+
+Database:
+
+- PostgreSQL
+
+Docker:
+
+- Docker Compose is required
+- At minimum, backend and database should run in Docker
+- Frontend should run in Docker
+
+---
+
+## What to Build
+
+The user should be able to manage support tickets.
+
+Required features:
+
+- View ticket list
+- Create ticket
+- Edit ticket status
+- Edit ticket priority
+- Delete ticket
+- Add a simple comment to a ticket
+
+To keep the task small, the comments can be shown on the same page as the ticket list or in a simple details view.
+
+---
+
+## Ticket Fields
+
+Each ticket should have:
+
+```txt
+id
+title
+description
+status
+priority
+createdAt
+```
+
+Status values:
+
+```txt
+open
+in_progress
+resolved
+```
+
+Priority values:
+
+```txt
+low
+medium
+high
+```
+
+---
+
+## Comment Fields
+
+Each comment should have:
+
+```txt
+id
+ticketId
+message
+createdAt
+```
+
+Relationship:
+
+```txt
+one ticket -> many comments
+```
+
+
+---
+
+## Frontend Tasks
+
+Create a simple UI with:
+
+- Ticket list
+- Form to create ticket
+- Status selector
+- Priority selector
+- Delete button
+- Comment input
+- List of comments
+- Basic loading or error message
+
+The design can be simple but slylish.
+
+---
+
+## Backend Tasks
+
+Create REST API endpoints:
+
+```txt
+GET    /tickets
+POST   /tickets
+PATCH  /tickets/:id
+DELETE /tickets/:id
+POST   /tickets/:ticketId/comments
+```
+
+Optional:
+
+```txt
+GET /tickets/:id
+GET /tickets/:ticketId/comments
+```
+
+Basic validation:
+
+- `title` is required
+- `description` is required
+- `status` must be valid
+- `priority` must be valid
+- comment message cannot be empty
+
+---
+
+## Database
+
+Create tables:
+
+```txt
+tickets
+comments
+```
+
+Recommended `tickets` fields:
+
+```txt
+id
+title
+description
+status
+priority
+created_at
+```
+
+Recommended `comments` fields:
+
+```txt
+id
+ticket_id
+message
+created_at
+```
+
+You may use:
+
+- Prisma
+- TypeORM
+- Sequelize
+- Spring Data JPA
+- Hibernate
+- Raw SQL
+- Any other simple database approach
+
+The database must store tickets permanently, not only in memory.
+
+Example database URL:
+
+```env
+DATABASE_URL=postgresql://postgres:postgres@postgres:5432/tickets_db
+```
+
+---
+
+## Docker
+
+The project should run with:
+
+```bash
+docker compose up --build
+```
+
+Required services:
+
+```txt
+backend
+database
+```
+
+Preferred services:
+
+```txt
+frontend
+backend
+database
+```
+
+Recommended ports:
+
+```txt
+frontend: http://localhost:3000
+backend:  http://localhost:4000
+database: localhost:5432
+```
+
+Example Docker Compose idea:
+
+```yaml
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/tickets_db
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tickets_db
+    ports:
+      - "5432:5432"
+```
+
+---
+
+## Suggested Structure
+
+```txt
+support-ticket-system/
+  frontend/
+  backend/
+  docker-compose.yml
+  README.md
+```
+
+---
+
+## README Requirements
+
+Your final README must include:
+
+- How to run the project
+- Technologies used
+- API endpoints
+- Database description
+- Docker description
+- What is completed
+- What is not completed
+- How AI was used
+
+Add this section:
+
+```md
+## AI Usage Report
+
+- AI tool used:
+- What I used AI for:
+- 2–3 example prompts:
+- What I changed manually:
+- What was difficult:
+```

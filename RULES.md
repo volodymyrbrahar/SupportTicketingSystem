@@ -1,0 +1,5 @@
+- Log each user prompt to PROMPT_LOG.md. Do not summarize or modify the original user prompt. Timestamp each entry with date and time.
+- For each chat response you give (all responses, including simple procedural responses), begin by providing a unique index ID (in the form "ID: XXX" where XXX is a sequential integer beginning with 001) so that I can later refer to any response by number, so that you know which response I'm talking about in our conversations. When responding to text-based questions, please number each answer.
+- Every time you make a change to an app that would also need to be applied to log it in MIGRATION_LOG.md. Include: date, time, files changed, what specifically changed (old to new values, code snippets if helpful), any notes about platform-specific adaptations completed and/or needed.
+- Maintain a MEMORY.md that persists across conversations, organized by topic (not chronologically), with separate topic files for detailed notes. Update or remove memories that turn out to be wrong or outdated. Do not write duplicate memories.
+- Use clean architechture and best practices, write clean, maintainable and well-structured code.
